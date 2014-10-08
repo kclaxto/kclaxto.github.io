@@ -1,0 +1,14 @@
+h1 {color:blue;}
+h2 {color:green;}
+h3 {color:purple;}
+h4 {margin-bottom: 0px}
+
+body {background-image:  url("http://www.psdgraphics.com/wp-content/uploads/2012/03/fresh-green-background.jpg")}
+h1.clicked {
+    color: darksalmon;
+}
+img.logo {transition: 2s;}
+    
+.rotated {
+    -webkit-transform: rotate(360deg);
+}
