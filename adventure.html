@@ -3,6 +3,7 @@
     
 <head>
     <link rel=stylesheet href="Style.css">
+    <script src="jquery-2.1.0.js"></script>
     
  <title>Hawaii Adventure!</title>   
     
@@ -21,14 +22,15 @@
     <center>
         <img src="eyes.gif">
          
-        <a href="http://www.gohawaii.com/">                 Would you like to see?
+        <a href="http://www.gohawaii.com/">
+            Would you like to see?
         </a>
          
     <h2>How are you going to get there?</h2>
     <h4>Click on Me...I get dizzy surfing!</h4>
     <img src=surfing-clip-art-12.png class="logo">
-    <script src="jquery-2.1.0.js"></script>
-    <script src="clicks.js"></script>
+    
+    
       <a href="surf.html">
         <br>Surf!<br>
         </a>
@@ -42,39 +44,10 @@
     <a href="hula.html">Hula?</a>
     
  </center>
-        <img class="logo clickable" src="humufish.jpg"> 
+        <img class="logo2 clickable" src="humufish.jpg"> 
     
-    <script src="animation.js"></script>
-    <style>
-.logo.clickable {
-    position: absolute;
-    width: 60px;
-    height: 40px;
-    left: 10%;
-    top: 300px;
-}
-
-.logo.clicked {
-    left: 90%;
-    
-    transform: scaleX(-1);
-    transform: rotate(360deg);
-}
-.logo2.clickable {
-    position: absolute;
-    width: 60px;
-    height: 40px;
-    left: 10%;
-    top: 300px;
-}
-
-.logo2.clicked {
-    left: 90%;
-    
-    transform: scaleX(-1);
-    transform: rotate(360deg);
-}        
+<script src="animation.js"></script>    
         
- </style>
+ <script src="clicks.js"></script>
  </body>            
 </html>

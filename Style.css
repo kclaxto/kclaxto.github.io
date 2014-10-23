@@ -12,3 +12,18 @@ img.logo {transition: 2s;}
 .rotated {
     -webkit-transform: rotate(360deg);
 }
+.logo2.clickable {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    left: 10%;
+    top: 300px;
+    transition: 2s;
+}
+
+.logo2.clicked {
+    left: 90%;
+    
+    transform: scaleX(-1);
+    transform: rotate(360deg);
+}
