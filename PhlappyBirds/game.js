@@ -4,69 +4,87 @@
 var main = {
     // load all the images and sounds
     preload: function() {
-        game.stage.backgroundColor = '#71c5cf';	
+        game.stage.backgroundColor = '#00c5cf';	
         
         game.load.image('player','diamond.png');
         game.load.image('topaz','topaz.png');
-        game.load.image('calcite','calcite.png');
-        game.load.image('Corundum','Corundum.png');
-        game.load.image('Feldspar','Feldspar.png');
-        game.load.image('fluorite','fluorite.png');
-        game.load.image('Gypsum','Gypsum.png');
-        game.load.image('Quartz','Quartz.png');
-        game.load.image('Talc','Talc.png');
-        game.load.image('Apatite','Apatite.png');
+        //game.load.image('explosion','explosion-sprite.png');
+        game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
+        
         
     },
 
     // set up the game
     create: function() {
         
-        
         // create the player using an image and place it at (100, 245)
         this.player = game.add.sprite(0, 5, 'player');
         this.topaz =  game.add.sprite(100, 15, 'topaz');
-        this.player = game.add.sprite(180, 15, 'calcite');
-        this.player = game.add.sprite(240, 15, 'Corundum');
-        this.player = game.add.sprite(350, 15, 'Feldspar');
-        this.player = game.add.sprite(450, 15, 'fluorite');
-        this.player = game.add.sprite(500, 15, 'Gypsum');
-        this.player = game.add.sprite(600, 15, 'Quartz');
-        this.player = game.add.sprite(700, 15, 'Talc');
-        this.player = game.add.sprite(800, 15, 'Apatite');
-        
-        this.player.width = 90;
-        this.player.height = 90;
-        this.topaz.width = 90;
-        this.topaz.height = 90;
-        this.Corundum.width = 90;
-        this.Corundum.height = 90;
-        this.Feldspar.width = 90;
-        this.Feldspar.height = 90;
-        this.Gypsum.width = 90;
-        this.Gypsum.height = 90;
-        this.quartz.width = 90;
-        this.quartz.height = 90;
-        this.Talc.width = 90;
-        this.Talc.height = 90;
-        this.Apatite.width = 10;
-        this.Apatite.height = 10;
+        this.explosion =  game.add.sprite(-200, -100, 'explosion');
         
         game.physics.arcade.enable(this.player);
+        game.physics.arcade.enable(this.topaz);
+
+        this.explosion.animations.add('explode');
+        this.explosion.animations.play('explode', 6, true);
+        
+        /*this.player.width = 90;
+        this.player.height = 90;
+        this.topaz.width = 90;
+        this.topaz.height = 90;*/
+        
+        this.player.body.setSize(90,90, 0, 0);
+        this.topaz.body.setSize(90,90, 0, 0);
+        
+        this.gem1 = this.player;
+        this.gem2 = this.topaz;
+        this.move2gems();
+        
+        //game.input.onDown.add(this.move, this);
         
         var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
-        space.onDown.add(this.jump, this);
+        space.onDown.add(this.animate2gems, this);
     },
     
+    move2gems: function() {
+        this.gem1.x=200
+        this.gem2.x=600
+        this.gem1.y=200
+        this.gem2.y=200
+    },
+    
+    animate2gems: function() {
+        
+        this.gem1.body.velocity.x=150; 
+        this.gem2.body.velocity.x=-150;
+        this.gem1.body.velocity.y=150; 
+        this.gem2.body.velocity.y=150;
+    },
     
     // update the state of the game
     update: function() {
         if (this.player.inWorld==false)
             this.restartGame();
         
-        if (game.physics.arcade.overlap(this.player,this.topaz)) {
+        if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
+            
+            //this.gem1.body.velocity.x=0;
+            //this.gem1.body.velocity.y=0; 
+            this.gem2.body.velocity.x=0;
+            this.gem2.body.velocity.y=0;
+            
+            //This is where are gems are colliding
+            
+            this.explosion.x=this.gem2.x
+            this.explosion.y=this.gem2.y
 
+            setTimeout(function(){
+                this.gem2.x=-200
+                this.gem2.y=-200
+                this.explosion.x=-200
+                this.explosion.y=-100
+            }.bind(this), 1000);
         }
     },
   
@@ -81,19 +99,14 @@ var main = {
     //	The 5000 value is the lifespan of each particle
     emitter.start(false, 5000, 20);
    
-  this.gem1.body.velocity.x=-700;
         
     },
   
-    addPipe: function() {  
-
-    },
-
     // resest the state of the game
     restartGame: function() {
         game.state.start('default');    
     }
 };
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', main);
+var game = new Phaser.Game(1000, 600, Phaser.AUTO, '', main);
 game.state.start("default");
