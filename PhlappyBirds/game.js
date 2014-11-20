@@ -123,40 +123,45 @@ var main = {
         if (!this.gem1)
         {
             this.gem1= clicked
-        }else {
+        } else if(!this.gem2) {
             this.gem2=clicked    
             this.move2gems()
-        } 
+        } else {
+            this.animate2gems()
+        }
     },
     
     // update the state of the game
     update: function() {
         if (this.player.inWorld==false)
             this.restartGame();
-        
-        if (false){//game.physics.arcade.overlap(this.gem1,this.gem2)) {
-           
-            
-            //this.gem1.body.velocity.x=0;
-            //this.gem1.body.velocity.y=0; 
-            this.gem2.body.velocity.x=0;
-            this.gem2.body.velocity.y=0;
-            this.gem2.x=-200
-            this.gem2.y=-200
-                
-            //This is where our gems are colliding
-            
-            this.explosion.x=this.gem1.x
-            this.explosion.y=this.gem1.y
 
-            setTimeout(function(){
+        if (this.gem1 && this.gem2) {    
+            if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
+                //this.gem1.body.velocity.x=0;
+                //this.gem1.body.velocity.y=0; 
+                this.gem2.body.velocity.x=0;
+                this.gem2.body.velocity.y=0;
+                this.gem2.x=-200
+                this.gem2.y=-200
 
-                this.explosion.x=-200
-                this.explosion.y=-100
-                
-   alert("Ha Ha! I am a diamond and I am the Hardest gem on Mohs' Hardness Scale!");
-               
-            }.bind(this), 1000);
+                //This is where our gems are colliding
+
+                this.explosion.x=this.gem1.x
+                this.explosion.y=this.gem1.y
+
+                setTimeout(function(){
+
+                    this.explosion.x=-200
+                    this.explosion.y=-100
+
+       alert("Ha Ha! I am a diamond and I am the Hardest gem on Mohs' Hardness Scale!");
+                    
+                    this.restartGame()
+                    this
+
+                }.bind(this), 1000);
+            }
         }
     },
     
@@ -176,6 +181,8 @@ var main = {
   
     // resest the state of the game
     restartGame: function() {
+        this.gem1 = null;
+        this.gem2 = null;
         game.state.start('default');    
     }
 };
