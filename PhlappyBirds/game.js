@@ -43,12 +43,36 @@ var main = {
         
         game.physics.arcade.enable(this.player);
         game.physics.arcade.enable(this.topaz);
-        
+        game.physics.arcade.enable(this.calcite);
+        game.physics.arcade.enable(this.corundum);
+        game.physics.arcade.enable(this.feldspar);
+        game.physics.arcade.enable(this.fluorite);
+        game.physics.arcade.enable(this.gypsum);
+        game.physics.arcade.enable(this.quartz);
+        game.physics.arcade.enable(this.talc);
+        game.physics.arcade.enable(this.apatite);
+                
 
         this.player.inputEnabled = true;
         this.player.events.onInputDown.add(this.selectgem, this);
         this.topaz.inputEnabled = true;
         this.topaz.events.onInputDown.add(this.selectgem, this);
+        this.calcite.inputEnabled= true;
+        this.calcite.events.onInputDown.add(this.selectgem, this);
+        this.corundum.inputEnabled = true;
+        this.corundum.events.onInputDown.add(this.selectgem, this);
+        this.feldspar.inputEnabled = true;
+        this.feldspar.events.onInputDown.add(this.selectgem, this);
+        this.fluorite.inputEnabled = true;
+        this.fluorite.events.onInputDown.add(this.selectgem, this);
+        this.gypsum.inputEnabled = true;
+        this.gypsum.events.onInputDown.add(this.selectgem, this);
+        this.quartz.inputEnabled = true;
+        this.quartz.events.onInputDown.add(this.selectgem, this);
+        this.talc.inputEnabled = true;
+        this.talc.events.onInputDown.add(this.selectgem, this);
+        this.apatite.inputEnabled = true;
+        this.apatite.events.onInputDown.add(this.selectgem, this);
         
 
         this.explosion.animations.add('explode');
