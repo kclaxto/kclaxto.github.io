@@ -6,7 +6,7 @@ var main = {
     preload: function() {
         game.stage.backgroundColor = '#00c5cf';	
         
-        game.load.image('player','diamond.png');
+        game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
         game.load.image('calcite','calcite.png');
         game.load.image('corundum','corundum.png');
@@ -27,21 +27,30 @@ var main = {
     create: function() {
         
         // create the player using an image and place it at (100, 245)
-        this.player = game.add.sprite(50, 5, 'player');
+        this.diamond = game.add.sprite(50, 5, 'diamond');
+        this.diamond.hardness = 10
         this.topaz =  game.add.sprite(600, 60, 'topaz');
+        this.topaz.hardness = 8
         this.calcite = game.add.sprite(300, 10, 'calcite');
+        this.calcite.hardness = 3
         this.corundum =  game.add.sprite(160, 20, 'corundum');
+        this.corundum.hardness = 9
         this.feldspar = game.add.sprite(700, 10, 'feldspar');
+        this.feldspar.hardness = 6
         this.fluorite =  game.add.sprite(900, 50, 'fluorite');
+        this.fluorite.hardness = 4
         this.gypsum = game.add.sprite(500, 10, 'gypsum');
+        this.gypsum.hardness = 2
         this.quartz =  game.add.sprite(1000, 50, 'quartz');
+        this.quartz.hardness = 7
         this.talc = game.add.sprite(500, 120, 'talc');
+        this.talc.hardness = 1
         this.apatite = game.add.sprite(800, 160, 'apatite');
-        
+        this.apatite.hardness = 5
         
         this.explosion =  game.add.sprite(-200, -100, 'explosion');
         
-        game.physics.arcade.enable(this.player);
+        game.physics.arcade.enable(this.diamond);
         game.physics.arcade.enable(this.topaz);
         game.physics.arcade.enable(this.calcite);
         game.physics.arcade.enable(this.corundum);
@@ -53,8 +62,8 @@ var main = {
         game.physics.arcade.enable(this.apatite);
                 
 
-        this.player.inputEnabled = true;
-        this.player.events.onInputDown.add(this.selectgem, this);
+        this.diamond.inputEnabled = true;
+        this.diamond.events.onInputDown.add(this.selectgem, this);
         this.topaz.inputEnabled = true;
         this.topaz.events.onInputDown.add(this.selectgem, this);
         this.calcite.inputEnabled= true;
@@ -81,12 +90,12 @@ var main = {
         /*this.player.width = 90;
         this.player.height = 90;
         this.topaz.width = 90;
-        this.topaz.height = 90;*/
+        this.topaz.height = 90;
         
-        this.player.body.setSize(90,90, 0, 0);
+        this.diamond.body.setSize(90,90, 0, 0);
         this.topaz.body.setSize(90,90, 0, 0);
         
-        /*this.gem1 = this.player;
+        this.gem1 = this.player;
         this.gem2 = this.topaz;
         this.move2gems();
         
@@ -133,32 +142,36 @@ var main = {
     
     // update the state of the game
     update: function() {
-        if (this.player.inWorld==false)
-            this.restartGame();
-
         if (this.gem1 && this.gem2) {    
             if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
                 //this.gem1.body.velocity.x=0;
                 //this.gem1.body.velocity.y=0; 
-                this.gem2.body.velocity.x=0;
-                this.gem2.body.velocity.y=0;
-                this.gem2.x=-200
-                this.gem2.y=-200
 
                 //This is where our gems are colliding
+                var winner, loser;
+                if ( this.gem1.hardness > this.gem2.hardness) {
+                    winner = this.gem1;
+                    loser = this.gem2;
+                } else {
+                    winner = this.gem2;
+                    loser = this.gem1;
+                }
 
-                this.explosion.x=this.gem1.x
-                this.explosion.y=this.gem1.y
+                this.explosion.x=winner.x
+                this.explosion.y=winner.y
+                loser.body.velocity.x=0;
+                loser.body.velocity.y=0;
+                loser.x=-200
+                loser.y=-200
 
                 setTimeout(function(){
 
                     this.explosion.x=-200
                     this.explosion.y=-100
 
-       alert("Ha Ha! I am a diamond and I am the Hardest gem on Mohs' Hardness Scale!");
+                    alert("Aha! "+winner.key+" is Harder with a number of "+winner.hardness+" on the Mohs' Hardness scale");
                     
                     this.restartGame()
-                    this
 
                 }.bind(this), 1000);
             }
