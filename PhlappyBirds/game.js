@@ -8,6 +8,16 @@ var main = {
         
         game.load.image('player','diamond.png');
         game.load.image('topaz','topaz.png');
+        game.load.image('calcite','calcite.png');
+        game.load.image('corundum','corundum.png');
+        game.load.image('feldspar','feldspar.png');
+        game.load.image('fluorite','fluorite.png');
+        game.load.image('quartz','quartz.png');
+        game.load.image('talc','talc.png');
+        game.load.image('apatite','apatite.png');
+        game.load.image('gypsum','gypsum.png');
+        
+        
         //game.load.image('explosion','explosion-sprite.png');
         game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
          
@@ -18,11 +28,23 @@ var main = {
         
         // create the player using an image and place it at (100, 245)
         this.player = game.add.sprite(0, 5, 'player');
-        this.topaz =  game.add.sprite(100, 15, 'topaz');
+        this.topaz =  game.add.sprite(80, 80, 'topaz');
+        this.calcite = game.add.sprite(300, 130, 'calcite');
+        this.corundum =  game.add.sprite(-5, 140, 'corundum');
+        this.feldspar = game.add.sprite(700, 130, 'feldspar');
+        this.fluorite =  game.add.sprite(900, 170, 'fluorite');
+        this.gypsum = game.add.sprite(500, 130, 'gypsum');
+        this.quartz =  game.add.sprite(1000, 170, 'quartz');
+        this.talc = game.add.sprite(500, 240, 'talc');
+        this.apatite = game.add.sprite(800, 280, 'apatite');
+        
+        
         this.explosion =  game.add.sprite(-200, -100, 'explosion');
         
         game.physics.arcade.enable(this.player);
         game.physics.arcade.enable(this.topaz);
+        game.physics.arcade.enable(this.calcite);
+        game.physics.arcade.enable(this.corundum);
 
         this.explosion.animations.add('explode');
         this.explosion.animations.play('explode', 6, true);
@@ -118,5 +140,5 @@ var main = {
     }
 };
 
-var game = new Phaser.Game(1000, 600, Phaser.AUTO, '', main);
+var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', main);
 game.state.start("default");
