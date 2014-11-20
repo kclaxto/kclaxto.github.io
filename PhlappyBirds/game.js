@@ -10,8 +10,7 @@ var main = {
         game.load.image('topaz','topaz.png');
         //game.load.image('explosion','explosion-sprite.png');
         game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
-        
-        
+         
     },
 
     // set up the game
@@ -42,9 +41,16 @@ var main = {
         
         //game.input.onDown.add(this.move, this);
         
-        var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        //var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
-        space.onDown.add(this.animate2gems, this);
+        //space.onDown.add(this.animate2gems, this);
+        this.gem1.inputEnabled = true;
+        this.gem1.events.onInputDown.add(this.animate2gems, this);
+        this.gem2.inputEnabled = true;
+        this.gem2.events.onInputDown.add(this.animate2gems, this);
+        
+        
+
     },
     
     move2gems: function() {
@@ -55,7 +61,6 @@ var main = {
     },
     
     animate2gems: function() {
-        
         this.gem1.body.velocity.x=150; 
         this.gem2.body.velocity.x=-150;
         this.gem1.body.velocity.y=150; 
@@ -68,26 +73,31 @@ var main = {
             this.restartGame();
         
         if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
+           
             
             //this.gem1.body.velocity.x=0;
             //this.gem1.body.velocity.y=0; 
             this.gem2.body.velocity.x=0;
             this.gem2.body.velocity.y=0;
+            this.gem2.x=-200
+            this.gem2.y=-200
+                
+            //This is where our gems are colliding
             
-            //This is where are gems are colliding
-            
-            this.explosion.x=this.gem2.x
-            this.explosion.y=this.gem2.y
+            this.explosion.x=this.gem1.x
+            this.explosion.y=this.gem1.y
 
             setTimeout(function(){
-                this.gem2.x=-200
-                this.gem2.y=-200
+
                 this.explosion.x=-200
                 this.explosion.y=-100
+                
+   alert("Ha Ha! I am a diamond and I am the Hardest gem on Mohs' Hardness Scale!");
+               
             }.bind(this), 1000);
         }
     },
-  
+    
     // makes the player jump
     jump: function() {
         
