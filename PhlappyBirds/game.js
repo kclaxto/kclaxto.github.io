@@ -45,6 +45,12 @@ var main = {
         game.physics.arcade.enable(this.topaz);
         
 
+        this.player.inputEnabled = true;
+        this.player.events.onInputDown.add(this.selectgem, this);
+        this.topaz.inputEnabled = true;
+        this.topaz.events.onInputDown.add(this.selectgem, this);
+        
+
         this.explosion.animations.add('explode');
         this.explosion.animations.play('explode', 6, true);
         
@@ -56,7 +62,7 @@ var main = {
         this.player.body.setSize(90,90, 0, 0);
         this.topaz.body.setSize(90,90, 0, 0);
         
-        this.gem1 = this.player;
+        /*this.gem1 = this.player;
         this.gem2 = this.topaz;
         this.move2gems();
         
@@ -69,7 +75,7 @@ var main = {
         this.gem1.events.onInputDown.add(this.animate2gems, this);
         this.gem2.inputEnabled = true;
         this.gem2.events.onInputDown.add(this.animate2gems, this);
-        
+        */
         
 
     },
@@ -88,12 +94,23 @@ var main = {
         this.gem2.body.velocity.y=150;
     },
     
+    
+    selectgem: function(clicked) {
+        if (!this.gem1)
+        {
+            this.gem1= clicked
+        }else {
+            this.gem2=clicked    
+            this.move2gems()
+        } 
+    },
+    
     // update the state of the game
     update: function() {
         if (this.player.inWorld==false)
             this.restartGame();
         
-        if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
+        if (false){//game.physics.arcade.overlap(this.gem1,this.gem2)) {
            
             
             //this.gem1.body.velocity.x=0;
