@@ -43,8 +43,7 @@ var main = {
         
         game.physics.arcade.enable(this.player);
         game.physics.arcade.enable(this.topaz);
-        game.physics.arcade.enable(this.calcite);
-        game.physics.arcade.enable(this.corundum);
+        
 
         this.explosion.animations.add('explode');
         this.explosion.animations.play('explode', 6, true);
