@@ -45,7 +45,7 @@ var main = {
         this.Quartz.hardness = 7
         this.Talc = game.add.sprite(500, 120, 'Talc');
         this.Talc.hardness = 1
-        this.Apatite = game.add.sprite(800, 160, 'apatite');
+        this.Apatite = game.add.sprite(800, 160, 'Apatite');
         this.Apatite.hardness = 5
         
         this.explosion =  game.add.sprite(-200, -100, 'explosion');
