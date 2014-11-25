@@ -19,6 +19,8 @@ var main = {
         
         game.load.audio('explosionsound','GrenadeExplosion.wav');
         
+        game.load.audio('clickrocksound','CaveRocks.wav');
+        
         //game.load.image('explosion','explosion-sprite.png');
         game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
          
@@ -28,6 +30,8 @@ var main = {
     create: function() {
         
         this.explosionsound = game.add.audio('explosionsound');
+        
+        this.clickrocksound = game.add.audio('clickrocksound');
         
         // create the player using an image and place it at (100, 245)
         this.diamond = game.add.sprite(50, 5, 'diamond');
@@ -132,6 +136,9 @@ var main = {
     
     
     selectgem: function(clicked) {
+        
+        this.clickrocksound.play();
+        
         if (!this.gem1)
         {
             this.gem1= clicked
