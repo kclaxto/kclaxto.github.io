@@ -9,13 +9,13 @@ var main = {
         game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
         game.load.image('calcite','calcite.png');
-        game.load.image('corundum','corundum.png');
-        game.load.image('feldspar','feldspar.png');
+        game.load.image('Corundum','Corundum.png');
+        game.load.image('Feldspar','Feldspar.png');
         game.load.image('fluorite','fluorite.png');
         game.load.image('quartz','quartz.png');
         game.load.image('talc','talc.png');
         game.load.image('Apatite','Apatite.png');
-        game.load.image('gypsum','gypsum.png');
+        game.load.image('Gypsum','Gypsum.png');
         
         
         //game.load.image('explosion','explosion-sprite.png');
@@ -33,14 +33,14 @@ var main = {
         this.topaz.hardness = 8
         this.calcite = game.add.sprite(300, 10, 'calcite');
         this.calcite.hardness = 3
-        this.corundum =  game.add.sprite(160, 20, 'corundum');
-        this.corundum.hardness = 9
-        this.feldspar = game.add.sprite(700, 10, 'feldspar');
-        this.feldspar.hardness = 6
+        this.Corundum =  game.add.sprite(160, 20, 'Corundum');
+        this.Corundum.hardness = 9
+        this.Feldspar = game.add.sprite(700, 10, 'Feldspar');
+        this.Feldspar.hardness = 6
         this.fluorite =  game.add.sprite(900, 50, 'fluorite');
         this.fluorite.hardness = 4
-        this.gypsum = game.add.sprite(500, 10, 'gypsum');
-        this.gypsum.hardness = 2
+        this.Gypsum = game.add.sprite(500, 10, 'Gypsum');
+        this.Gypsum.hardness = 2
         this.quartz =  game.add.sprite(1000, 50, 'quartz');
         this.quartz.hardness = 7
         this.talc = game.add.sprite(500, 120, 'talc');
@@ -53,10 +53,10 @@ var main = {
         game.physics.arcade.enable(this.diamond);
         game.physics.arcade.enable(this.topaz);
         game.physics.arcade.enable(this.calcite);
-        game.physics.arcade.enable(this.corundum);
-        game.physics.arcade.enable(this.feldspar);
+        game.physics.arcade.enable(this.Corundum);
+        game.physics.arcade.enable(this.Feldspar);
         game.physics.arcade.enable(this.fluorite);
-        game.physics.arcade.enable(this.gypsum);
+        game.physics.arcade.enable(this.Gypsum);
         game.physics.arcade.enable(this.quartz);
         game.physics.arcade.enable(this.talc);
         game.physics.arcade.enable(this.Apatite);
@@ -68,14 +68,14 @@ var main = {
         this.topaz.events.onInputDown.add(this.selectgem, this);
         this.calcite.inputEnabled= true;
         this.calcite.events.onInputDown.add(this.selectgem, this);
-        this.corundum.inputEnabled = true;
-        this.corundum.events.onInputDown.add(this.selectgem, this);
-        this.feldspar.inputEnabled = true;
-        this.feldspar.events.onInputDown.add(this.selectgem, this);
+        this.Corundum.inputEnabled = true;
+        this.Corundum.events.onInputDown.add(this.selectgem, this);
+        this.Feldspar.inputEnabled = true;
+        this.Feldspar.events.onInputDown.add(this.selectgem, this);
         this.fluorite.inputEnabled = true;
         this.fluorite.events.onInputDown.add(this.selectgem, this);
-        this.gypsum.inputEnabled = true;
-        this.gypsum.events.onInputDown.add(this.selectgem, this);
+        this.Gypsum.inputEnabled = true;
+        this.Gypsum.events.onInputDown.add(this.selectgem, this);
         this.quartz.inputEnabled = true;
         this.quartz.events.onInputDown.add(this.selectgem, this);
         this.talc.inputEnabled = true;
