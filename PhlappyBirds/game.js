@@ -17,6 +17,7 @@ var main = {
         game.load.image('Apatite','Apatite.png');
         game.load.image('Gypsum','Gypsum.png');
         
+        game.load.audio('explosionsound','GrenadeExplosion.wav');
         
         //game.load.image('explosion','explosion-sprite.png');
         game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
@@ -25,6 +26,8 @@ var main = {
 
     // set up the game
     create: function() {
+        
+        this.explosionsound = game.add.audio('explosionsound');
         
         // create the player using an image and place it at (100, 245)
         this.diamond = game.add.sprite(50, 5, 'diamond');
@@ -156,6 +159,8 @@ var main = {
                     winner = this.gem2;
                     loser = this.gem1;
                 }
+                
+                this.explosionsound.play();
 
                 this.explosion.x=winner.x
                 this.explosion.y=winner.y
