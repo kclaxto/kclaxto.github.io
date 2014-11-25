@@ -14,7 +14,7 @@ var main = {
         game.load.image('fluorite','fluorite.png');
         game.load.image('quartz','quartz.png');
         game.load.image('talc','talc.png');
-        game.load.image('apatite','apatite.png');
+        game.load.image('Apatite','Apatite.png');
         game.load.image('gypsum','gypsum.png');
         
         
@@ -45,8 +45,8 @@ var main = {
         this.quartz.hardness = 7
         this.talc = game.add.sprite(500, 120, 'talc');
         this.talc.hardness = 1
-        this.apatite = game.add.sprite(800, 160, 'apatite');
-        this.apatite.hardness = 5
+        this.Apatite = game.add.sprite(800, 160, 'apatite');
+        this.Apatite.hardness = 5
         
         this.explosion =  game.add.sprite(-200, -100, 'explosion');
         
@@ -59,7 +59,7 @@ var main = {
         game.physics.arcade.enable(this.gypsum);
         game.physics.arcade.enable(this.quartz);
         game.physics.arcade.enable(this.talc);
-        game.physics.arcade.enable(this.apatite);
+        game.physics.arcade.enable(this.Apatite);
                 
 
         this.diamond.inputEnabled = true;
@@ -80,8 +80,8 @@ var main = {
         this.quartz.events.onInputDown.add(this.selectgem, this);
         this.talc.inputEnabled = true;
         this.talc.events.onInputDown.add(this.selectgem, this);
-        this.apatite.inputEnabled = true;
-        this.apatite.events.onInputDown.add(this.selectgem, this);
+        this.Apatite.inputEnabled = true;
+        this.Apatite.events.onInputDown.add(this.selectgem, this);
         
 
         this.explosion.animations.add('explode');
