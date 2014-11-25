@@ -4,7 +4,7 @@
 var main = {
     // load all the images and sounds
     preload: function() {
-        game.stage.backgroundColor = '#00c5cf';	
+        game.stage.backgroundColor = '#71c5cf';	
         
         game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
