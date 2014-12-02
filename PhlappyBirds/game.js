@@ -4,7 +4,8 @@
 var main = {
     // load all the images and sounds
     preload: function() {
-        game.stage.backgroundColor = '#71c5cf';	
+        //game.stage.backgroundColor = '#71c5cf';	
+        game.stage.backgroundColor = '#000000';	
         
         game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
@@ -16,22 +17,36 @@ var main = {
         game.load.image('Talc','Talc.png');
         game.load.image('Apatite','Apatite.png');
         game.load.image('Gypsum','Gypsum.png');
+        game.load.image('background', 'Starrybackground.gif');
+        
+        
         
         game.load.audio('explosionsound','GrenadeExplosion.wav');
         
         game.load.audio('clickrocksound','CaveRocks.wav');
         
+        game.load.audio('diamonddropsound','coins-drop-1.wav');
+        
+        
+
+        
         //game.load.image('explosion','explosion-sprite.png');
         game.load.spritesheet('explosion', 'explosion-sprite.png', 128, 128, 30);
          
     },
+    
 
     // set up the game
     create: function() {
+            
         
+        game.add.tileSprite(0, 0, 1100, 600, 'background');
+
         this.explosionsound = game.add.audio('explosionsound');
         
         this.clickrocksound = game.add.audio('clickrocksound');
+        
+        this.diamonddrops = game.add.audio('diamonddropsound');
         
         // create the player using an image and place it at (100, 245)
         this.diamond = game.add.sprite(50, 5, 'diamond');
@@ -107,10 +122,11 @@ var main = {
         this.move2gems();
         
         //game.input.onDown.add(this.move, this);
+        */
+        var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
-        //var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        
-        //space.onDown.add(this.animate2gems, this);
+        space.onDown.add(this.fallingdiamonds, this);
+        /*
         this.gem1.inputEnabled = true;
         this.gem1.events.onInputDown.add(this.animate2gems, this);
         this.gem2.inputEnabled = true;
@@ -190,17 +206,17 @@ var main = {
         }
     },
     
-    // makes the player jump
-    jump: function() {
+    // makes the diamond jump
+    fallingdiamonds: function() {
         
-     var emitter = game.add.emitter(game.world.centerX, 200, 200);
+     var emitter = game.add.emitter(game.world.centerX, 0, 200);
 
-    emitter.makeParticles('player');
+    emitter.makeParticles('diamond');
 
     //	false means don't explode all the sprites at once, but instead release at a rate of 20 particles per frame
     //	The 5000 value is the lifespan of each particle
     emitter.start(false, 5000, 20);
-   
+    this.diamonddropsound.play();
         
     },
   
