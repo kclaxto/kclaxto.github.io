@@ -170,8 +170,8 @@ var main = {
     update: function() {
         if (this.gem1 && this.gem2) {    
             if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
-                //this.gem1.body.velocity.x=0;
-                //this.gem1.body.velocity.y=0; 
+                this.gem1.body.velocity.x=0;
+                this.gem1.body.velocity.y=0; 
 
                 //This is where our gems are colliding
                 var winner, loser;
