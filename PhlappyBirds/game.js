@@ -108,32 +108,10 @@ var main = {
 
         this.explosion.animations.add('explode');
         this.explosion.animations.play('explode', 6, true);
-        
-        /*this.player.width = 90;
-        this.player.height = 90;
-        this.topaz.width = 90;
-        this.topaz.height = 90;
-        
-        this.diamond.body.setSize(90,90, 0, 0);
-        this.topaz.body.setSize(90,90, 0, 0);
-        
-        this.gem1 = this.player;
-        this.gem2 = this.topaz;
-        this.move2gems();
-        
-        //game.input.onDown.add(this.move, this);
-        */
+       
         var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
         space.onDown.add(this.fallingdiamonds, this);
-        /*
-        this.gem1.inputEnabled = true;
-        this.gem1.events.onInputDown.add(this.animate2gems, this);
-        this.gem2.inputEnabled = true;
-        this.gem2.events.onInputDown.add(this.animate2gems, this);
-        */
-        
-
     },
     
     move2gems: function() {
@@ -158,9 +136,15 @@ var main = {
         if (!this.gem1)
         {
             this.gem1= clicked
+            this.gem1.x=200
+            this.gem1.y=200
+           
+            
         } else if(!this.gem2) {
             this.gem2=clicked    
-            this.move2gems()
+            this.gem2.x=600
+            this.gem2.y=200
+            
         } else {
             this.animate2gems()
         }
