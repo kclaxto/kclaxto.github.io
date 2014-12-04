@@ -5,7 +5,7 @@ var main = {
     // load all the images and sounds
     preload: function() {
         //game.stage.backgroundColor = '#71c5cf';	
-        game.stage.backgroundColor = '#000000';	
+        //game.stage.backgroundColor = '#000000';	
         
         game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
@@ -40,13 +40,13 @@ var main = {
     create: function() {
             
         
-        game.add.tileSprite(0, 0, 1100, 600, 'background');
+        //game.add.tileSprite(0, 0, 1100, 600, 'background');
 
         this.explosionsound = game.add.audio('explosionsound');
         
         this.clickrocksound = game.add.audio('clickrocksound');
         
-        this.diamonddrops = game.add.audio('diamonddropsound');
+        this.diamonddropsound = game.add.audio('diamonddropsound');
         
         // create the player using an image and place it at (100, 245)
         this.diamond = game.add.sprite(50, 5, 'diamond');
@@ -208,7 +208,7 @@ var main = {
     
     // makes the diamond jump
     fallingdiamonds: function() {
-        
+        alert("CONGRATULATIONS!!! YOU ARE SMOTHERED IN DIAMONDS!  YOU ARE RICH!! PRESS RETURN/ENTER TO RECEIVE YOUR RICHES!!!");
      var emitter = game.add.emitter(game.world.centerX, 0, 200);
 
     emitter.makeParticles('diamond');
@@ -216,6 +216,7 @@ var main = {
     //	false means don't explode all the sprites at once, but instead release at a rate of 20 particles per frame
     //	The 5000 value is the lifespan of each particle
     emitter.start(false, 5000, 20);
+        
     this.diamonddropsound.play();
         
     },
@@ -228,5 +229,5 @@ var main = {
     }
 };
 
-var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', main);
+var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', main, true);
 game.state.start("default");
