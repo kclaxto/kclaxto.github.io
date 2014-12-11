@@ -90,7 +90,7 @@ var main = {
     
     
     selectgem: function(clicked) {
-        
+
         this.clickrocksound.play();
         
         if (!this.gem1)
