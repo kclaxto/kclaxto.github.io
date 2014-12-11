@@ -1,11 +1,7 @@
-// create a new Phaser game on an 800x600 screen
-
 
 var main = {
     // load all the images and sounds
-    preload: function() {
-        //game.stage.backgroundColor = '#71c5cf';	
-        //game.stage.backgroundColor = '#000000';	
+    preload: function() {	
         
         game.load.image('diamond','diamond.png');
         game.load.image('topaz','topaz.png');
@@ -35,13 +31,27 @@ var main = {
          
     },
     
+    createGem: function(name, hardness, x, y) {
+        var gem = game.add.sprite(x, y, name);
+        gem.hardness = hardness
+        game.physics.arcade.enable(gem);
+        gem.inputEnabled = true;
+        gem.events.onInputDown.add(this.selectgem, this);
 
+        var style = { 
+            font: "30px 'Comic Sans MS'", 
+            fill: "#fff" 
+             
+        };
+        var t = game.add.text(x, y, name, style);
+        
+        this[name] = gem;
+    },
+    
     // set up the game
     create: function() {
             
         
-        //game.add.tileSprite(0, 0, 1100, 600, 'background');
-
         this.explosionsound = game.add.audio('explosionsound');
         
         this.clickrocksound = game.add.audio('clickrocksound');
@@ -49,63 +59,19 @@ var main = {
         this.diamonddropsound = game.add.audio('diamonddropsound');
         
         // create the player using an image and place it at (100, 245)
-        this.diamond = game.add.sprite(50, 5, 'diamond');
-        this.diamond.hardness = 10
-        this.topaz =  game.add.sprite(600, 60, 'topaz');
-        this.topaz.hardness = 8
-        this.calcite = game.add.sprite(300, 10, 'calcite');
-        this.calcite.hardness = 3
-        this.Corundum =  game.add.sprite(160, 20, 'Corundum');
-        this.Corundum.hardness = 9
-        this.Feldspar = game.add.sprite(700, 10, 'Feldspar');
-        this.Feldspar.hardness = 6
-        this.fluorite =  game.add.sprite(900, 50, 'fluorite');
-        this.fluorite.hardness = 4
-        this.Gypsum = game.add.sprite(500, 10, 'Gypsum');
-        this.Gypsum.hardness = 2
-        this.Quartz =  game.add.sprite(1000, 50, 'Quartz');
-        this.Quartz.hardness = 7
-        this.Talc = game.add.sprite(500, 120, 'Talc');
-        this.Talc.hardness = 1
-        this.Apatite = game.add.sprite(800, 160, 'Apatite');
-        this.Apatite.hardness = 5
+        this.createGem('diamond', 10, 50, 5);
+        this.createGem('topaz', 8, 600, 60);
+        this.createGem('calcite', 3, 300, 10);
+        this.createGem('Corundum', 9, 160, 20);
+        this.createGem('Feldspar', 6, 700, 10);
+        this.createGem('fluorite', 4, 900, 50);
+        this.createGem('Gypsum', 2, 500, 10);
+        this.createGem('Quartz', 7, 1000, 50);
+        this.createGem('Talc', 1, 500, 120);
+        this.createGem('Apatite', 5, 800, 160);
+
         
         this.explosion =  game.add.sprite(-200, -100, 'explosion');
-        
-        game.physics.arcade.enable(this.diamond);
-        game.physics.arcade.enable(this.topaz);
-        game.physics.arcade.enable(this.calcite);
-        game.physics.arcade.enable(this.Corundum);
-        game.physics.arcade.enable(this.Feldspar);
-        game.physics.arcade.enable(this.fluorite);
-        game.physics.arcade.enable(this.Gypsum);
-        game.physics.arcade.enable(this.Quartz);
-        game.physics.arcade.enable(this.Talc);
-        game.physics.arcade.enable(this.Apatite);
-                
-
-        this.diamond.inputEnabled = true;
-        this.diamond.events.onInputDown.add(this.selectgem, this);
-        this.topaz.inputEnabled = true;
-        this.topaz.events.onInputDown.add(this.selectgem, this);
-        this.calcite.inputEnabled= true;
-        this.calcite.events.onInputDown.add(this.selectgem, this);
-        this.Corundum.inputEnabled = true;
-        this.Corundum.events.onInputDown.add(this.selectgem, this);
-        this.Feldspar.inputEnabled = true;
-        this.Feldspar.events.onInputDown.add(this.selectgem, this);
-        this.fluorite.inputEnabled = true;
-        this.fluorite.events.onInputDown.add(this.selectgem, this);
-        this.Gypsum.inputEnabled = true;
-        this.Gypsum.events.onInputDown.add(this.selectgem, this);
-        this.Quartz.inputEnabled = true;
-        this.Quartz.events.onInputDown.add(this.selectgem, this);
-        this.Talc.inputEnabled = true;
-        this.Talc.events.onInputDown.add(this.selectgem, this);
-        this.Apatite.inputEnabled = true;
-        this.Apatite.events.onInputDown.add(this.selectgem, this);
-        
-
         this.explosion.animations.add('explode');
         this.explosion.animations.play('explode', 6, true);
        
@@ -114,13 +80,7 @@ var main = {
         space.onDown.add(this.fallingdiamonds, this);
     },
     
-    move2gems: function() {
-        this.gem1.x=200
-        this.gem2.x=600
-        this.gem1.y=200
-        this.gem2.y=200
-    },
-    
+
     animate2gems: function() {
         this.gem1.body.velocity.x=150; 
         this.gem2.body.velocity.x=-150;
@@ -152,41 +112,39 @@ var main = {
     
     // update the state of the game
     update: function() {
-        if (this.gem1 && this.gem2) {    
-            if (game.physics.arcade.overlap(this.gem1,this.gem2)) {
-                this.gem1.body.velocity.x=0;
-                this.gem1.body.velocity.y=0; 
+        if (this.gem1 && this.gem2 && game.physics.arcade.overlap(this.gem1,this.gem2)) {
+            this.gem1.body.velocity.x=0;
+            this.gem1.body.velocity.y=0; 
 
-                //This is where our gems are colliding
-                var winner, loser;
-                if ( this.gem1.hardness > this.gem2.hardness) {
-                    winner = this.gem1;
-                    loser = this.gem2;
-                } else {
-                    winner = this.gem2;
-                    loser = this.gem1;
-                }
-                
-                this.explosionsound.play();
-
-                this.explosion.x=winner.x
-                this.explosion.y=winner.y
-                loser.body.velocity.x=0;
-                loser.body.velocity.y=0;
-                loser.x=-200
-                loser.y=-200
-
-                setTimeout(function(){
-
-                    this.explosion.x=-200
-                    this.explosion.y=-100
-
-                    alert("Aha! "+winner.key+" is Harder with a number of "+winner.hardness+" on the Mohs' Hardness scale");
-                    
-                    this.restartGame()
-
-                }.bind(this), 1000);
+            //This is where our gems are colliding
+            var winner, loser;
+            if ( this.gem1.hardness > this.gem2.hardness) {
+                winner = this.gem1;
+                loser = this.gem2;
+            } else {
+                winner = this.gem2;
+                loser = this.gem1;
             }
+
+            this.explosionsound.play();
+
+            this.explosion.x=winner.x
+            this.explosion.y=winner.y
+            loser.body.velocity.x=0;
+            loser.body.velocity.y=0;
+            loser.x=-200
+            loser.y=-200
+
+            setTimeout(function(){
+
+                this.explosion.x=-200
+                this.explosion.y=-100
+
+                alert("Aha! "+winner.key+" is Harder with a number of "+winner.hardness+" on the Mohs' Hardness scale");
+
+                this.restartGame()
+
+            }.bind(this), 1000);
         }
     },
     
@@ -212,6 +170,8 @@ var main = {
         game.state.start('default');    
     }
 };
+
+// create a new Phaser game on an 1100x600 screen
 
 var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', main, true);
 game.state.start("default");
